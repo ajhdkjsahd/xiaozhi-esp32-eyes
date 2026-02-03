@@ -17,7 +17,6 @@
 
 // 新增：引入眼睛控制头文件
 #include "Eye_Controller.h"
-#include "lamp_G.h"
 
 #ifdef SH1106
 #include <esp_lcd_panel_sh1106.h>
@@ -153,11 +152,10 @@ private:
 
     // 物联网初始化，逐步迁移到 MCP 协议
     void InitializeTools() {
-        ESP_LOGI(TAG, "正在注册 MCP 工具..."); // 加个日志看看有没有跑进来
+        ESP_LOGI(TAG, "正在注册 MCP 工具..."); 
+        static LampController lamp(LAMP_GPIO);
         // 新增：实例化眼睛控制器
         static Eye_Controller eye_controller;
-        static LampController lamp(LAMP_GPIO);
-        static Green_Lamp lamp_G(GPIO_NUM_17);
         ESP_LOGI(TAG, "MCP 工具注册完成");
     }
 
